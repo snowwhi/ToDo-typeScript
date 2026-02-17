@@ -34,12 +34,16 @@ const Todo = () => {
       }
   }
   const handleDelete =(idx:number)=>{
-   delref.current[idx]!.style.backgroundColor ='orange'
+   delref.current[idx]!.remove()
   }
-  const handleEdit=(idx:number)=>{
-     ref.current[idx]!.style.backgroundColor ='purple'
-    console.log('i am being edited')
+ const handleEdit = (idx: number) => {
+  const title = ref.current[idx];
+  if (title) {
+    title.contentEditable = "true"; 
+    title.focus(); 
+    console.log(`Index ${idx} is now editable`);
   }
+};
   return (
     <div className='w-2/3 min-h-1/2 rounded-2xl bg-white p-4'>
      <h1 className='text-3xl font-bold text-slate-950'>Todo List</h1>
@@ -50,9 +54,26 @@ const Todo = () => {
        return(
          <div key={idx} className='mt-2 w-full h-10 bg-slate-950 rounded-2xl px-4 py-1 flex gap-2 relative' ref={(el) => {delref.current[idx] = el; }}>
           <input type="checkbox" name="Check" id="check"  onChange={() => handlecomplete(idx)}/>
-          <h2 className='text-2xl text-white font-bold' ref={(el) => {ref.current[idx] = el; }}>
-          {element.msg}
-          </h2>
+          <h2 
+  ref={(el) => (ref.current[idx] = el)}
+  className='text-2xl text-white font-bold'
+  onKeyDown={(e) => {
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      e.currentTarget.blur(); 
+    }
+  }}
+  onBlur={(e) => {
+    e.currentTarget.contentEditable = "false";
+    e.currentTarget.style.outline = "none";
+    e.currentTarget.style.backgroundColor = "transparent";
+    const newList = [...list];
+    newList[idx].msg = e.currentTarget.innerText;
+    setList(newList);
+  }}
+>
+  {element.msg}
+</h2>
           <div className='absolute right-2 text-white flex gap-2  text-lg ' >
 
            <button  className='p-1 ' type="button" onClick={()=>handleEdit(idx)}><i className="ri-edit-2-fill"></i></button>
