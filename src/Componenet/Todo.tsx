@@ -1,9 +1,12 @@
 import React, { useState ,useRef} from 'react'
+import 'remixicon/fonts/remixicon.css'
  interface TodoItem {
   msg: string;
 }
 const Todo = () => {
   const ref =useRef<(HTMLHeadingElement | null)[]>([]);
+    const delref =useRef<(HTMLHeadingElement | null)[]>([]);
+
   const [msg,setMsg] =useState('')
    const [isChecked, setIsChecking] = useState(false);
   const [list,setList]=useState<TodoItem[]>([]);
@@ -30,6 +33,13 @@ const Todo = () => {
         h1ref!.style.textDecoration = 'none';
       }
   }
+  const handleDelete =(idx:number)=>{
+   delref.current[idx]!.style.backgroundColor ='orange'
+  }
+  const handleEdit=(idx:number)=>{
+     ref.current[idx]!.style.backgroundColor ='purple'
+    console.log('i am being edited')
+  }
   return (
     <div className='w-2/3 min-h-1/2 rounded-2xl bg-white p-4'>
      <h1 className='text-3xl font-bold text-slate-950'>Todo List</h1>
@@ -38,11 +48,16 @@ const Todo = () => {
 
      {list.map(function (element,idx) {
        return(
-         <div key={idx} className='mt-2 w-full h-10 bg-slate-950 rounded-2xl px-4 py-1 flex gap-2'>
+         <div key={idx} className='mt-2 w-full h-10 bg-slate-950 rounded-2xl px-4 py-1 flex gap-2 relative' ref={(el) => {delref.current[idx] = el; }}>
           <input type="checkbox" name="Check" id="check"  onChange={() => handlecomplete(idx)}/>
           <h2 className='text-2xl text-white font-bold' ref={(el) => {ref.current[idx] = el; }}>
           {element.msg}
           </h2>
+          <div className='absolute right-2 text-white flex gap-2  text-lg ' >
+
+           <button  className='p-1 ' type="button" onClick={()=>handleEdit(idx)}><i className="ri-edit-2-fill"></i></button>
+           <button  className='p-1 ' type="button" onClick={()=>handleDelete(idx)}><i className="ri-close-circle-fill"></i></button>
+          </div>
           </div>
         )
       })}
