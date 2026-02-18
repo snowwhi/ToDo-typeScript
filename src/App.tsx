@@ -3,6 +3,7 @@ import './App.css'
 import Nav from './Componenet/Nav'
 import Todo from './Componenet/Todo'
 import ContextTodo from './Componenet/SirContext/ContextTodo'
+import Redux from './Componenet/SirContext/ReduxToolkit/Redux'
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
         <Routes>
           <Route path='/' element={<Todo />} />
           <Route path='/context' element={<ContextTodo />} />
+           <Route path='/Redux' element={<Redux/>} />
         </Routes>
       </div>
     </>
