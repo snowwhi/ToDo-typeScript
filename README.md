@@ -111,7 +111,6 @@ useEffect(() => {
 # Clone the repo
 git clone https://github.com/snowwhi/ToDo-typeScript.git
 
-
 # Install dependencies
 npm install
 
@@ -147,4 +146,4 @@ npm run dev
 Built as a self-learning project while exploring React + TypeScript patterns.
 
 ## Live Demo
-   
+   https://to-do-type-script-rdgw.vercel.app/
