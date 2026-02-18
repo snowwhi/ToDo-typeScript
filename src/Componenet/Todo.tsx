@@ -55,7 +55,7 @@ const Todo = () => {
          <div key={idx} className='mt-2 w-full h-10 bg-slate-950 rounded-2xl px-4 py-1 flex gap-2 relative' ref={(el) => {delref.current[idx] = el; }}>
           <input type="checkbox" name="Check" id="check"  onChange={() => handlecomplete(idx)}/>
           <h2 
-  ref={(el) => (ref.current[idx] = el)}
+  ref={(el) => { ref.current[idx] = el; }}
   className='text-2xl text-white font-bold'
   onKeyDown={(e) => {
     if (e.key === 'Enter') {
