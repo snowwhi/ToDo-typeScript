@@ -4,7 +4,6 @@ import Nav from './Componenet/Nav'
 import Todo from './Componenet/Todo'
 import ContextTodo from './Componenet/SirContext/ContextTodo'
 import Redux from './Componenet/SirContext/ReduxToolkit/Redux'
-
 function App() {
   return (
     <>

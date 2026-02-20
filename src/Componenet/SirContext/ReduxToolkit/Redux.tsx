@@ -1,7 +1,12 @@
-
+import AddTodo from "./AddTodo"
+import Todos from "./Todolist"
 const Redux = () => {
   return (
-    <div>Redux</div>
+    <>
+      <h1>Learn about redux toolkit</h1>
+      <AddTodo />
+      <Todos />
+    </>
   )
 }
 

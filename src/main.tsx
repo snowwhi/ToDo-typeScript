@@ -1,12 +1,21 @@
 
-import { createRoot } from 'react-dom/client'
-import './App.css'
-import App from './App.tsx'
-import { BrowserRouter } from 'react-router-dom'
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import { BrowserRouter } from 'react-router-dom';
+import { Provider } from 'react-redux';
+import { store } from './Componenet/SirContext/ReduxToolkit/store.ts'; // Ensure this path is correct
+import App from './App.tsx';
+import './App.css';
 
-createRoot(document.getElementById('root')!).render(
-  <BrowserRouter>
-    <App />
-  </BrowserRouter>
-  
-)
+// The '!' handles the TypeScript null check for the root element
+const rootElement = document.getElementById('root')!;
+
+ReactDOM.createRoot(rootElement).render(
+  <React.StrictMode>
+    <Provider store={store}>
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
+    </Provider>
+  </React.StrictMode>
+);
